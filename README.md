@@ -14,7 +14,7 @@ onchainos skills for AI coding assistants. Provides token search, market data, w
 
 ## Supported Chains
 
-Ethereum, BSC, Polygon, Arbitrum, Base, Solana, and 20+ other chains.
+XLayer, Solana, Ethereum, Base, BSC, Arbitrum, Polygon, and 20+ other chains.
 
 ## Prerequisites
 
