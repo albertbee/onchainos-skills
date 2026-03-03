@@ -40,8 +40,6 @@ OKX_SECRET_KEY="146127D9883D97E00799C59BE9CFCEBB"
 OKX_PASSPHRASE="onchainOS666!"
 ```
 
-> **Note**: This shared key has rate limits. For higher usage or production, apply for your own key.
-
 ## Installation
 
 ### Recommended
@@ -91,6 +89,23 @@ The skills work together in typical DeFi flows:
 **Pre-flight Check**: `okx-onchain-gateway` (estimate gas) -> `okx-onchain-gateway` (simulate tx) -> `okx-onchain-gateway` (broadcast) -> `okx-onchain-gateway` (track order)
 
 **Full Trading Flow**: `okx-dex-token` (search) -> `okx-dex-market` (price/chart) -> `okx-wallet-portfolio` (check balance) -> `okx-dex-swap` (get tx) -> `okx-onchain-gateway` (simulate + broadcast + track)
+
+## API Key Security Notice & Disclaimer
+
+**Built-in Sandbox API Keys (Default)** This integration includes built-in sandbox API keys for testing purposes only. By using these keys, you acknowledge and accept the following:
+
+* These keys are shared and may be subject to rate limiting, quota exhaustion, or unexpected behavior at any time without prior notice.
+* Any Agent execution errors, failures, financial losses, or data inaccuracies arising from the use of built-in keys are solely your responsibility.
+* We expressly disclaim all liability for any direct, indirect, incidental, or consequential damages resulting from the use of built-in sandbox keys in production or quasi-production environments.
+* Built-in keys are strictly intended for local testing and evaluation only. Do not use them in production environments or with real assets.
+
+**Production Usage (Recommended)** For stable and reliable production usage, you must provide your own API credentials by setting the following environment variables:
+
+* `OKX_API_KEY`
+* `OKX_SECRET_KEY`
+* `OKX_PASSPHRASE`
+
+You are solely responsible for the security, confidentiality, and proper management of your own API keys. We shall not be liable for any unauthorized access, asset loss, or damages resulting from improper key management on your part.
 
 ## License
 

@@ -36,6 +36,11 @@ import crypto from 'crypto';
 
 const BASE = 'https://web3.okx.com';
 
+// Shared test API key (for development/testing only)
+const OKX_API_KEY = process.env.OKX_API_KEY || '9fc58c11-e2d3-4f52-b5e9-d863a094c50f';
+const OKX_SECRET_KEY = process.env.OKX_SECRET_KEY || '146127D9883D97E00799C59BE9CFCEBB';
+const OKX_PASSPHRASE = process.env.OKX_PASSPHRASE || 'onchainOS666!';
+
 // Signature rule:
 //   GET  → body = "", requestPath includes query string (e.g., "/api/v6/dex/market/token/search?chains=196&search=xETH")
 //   POST → body = JSON string of request body, requestPath is path only (e.g., "/api/v6/dex/market/price-info")
@@ -43,13 +48,13 @@ async function okxFetch(method: 'GET' | 'POST', path: string, body?: object) {
   const timestamp = new Date().toISOString();
   const bodyStr = body ? JSON.stringify(body) : '';
   const sign = crypto
-    .createHmac('sha256', process.env.OKX_SECRET_KEY!)
+    .createHmac('sha256', OKX_SECRET_KEY)
     .update(timestamp + method + path + bodyStr)
     .digest('base64');
   const headers: Record<string, string> = {
-    'OK-ACCESS-KEY': process.env.OKX_API_KEY!,
+    'OK-ACCESS-KEY': OKX_API_KEY,
     'OK-ACCESS-SIGN': sign,
-    'OK-ACCESS-PASSPHRASE': process.env.OKX_PASSPHRASE!,
+    'OK-ACCESS-PASSPHRASE': OKX_PASSPHRASE,
     'OK-ACCESS-TIMESTAMP': timestamp,
     'Content-Type': 'application/json',
   };
@@ -338,3 +343,8 @@ GET /api/v6/dex/market/token/toplist?chains=501&sortBy=5&timeFrame=4
 - For raw real-time prices / K-lines / trade history -> use `okx-dex-market`
 - For balance queries -> use `okx-wallet-portfolio`
 - For swap execution -> use `okx-dex-swap`
+
+## Key Safety Points
+
+- Built-in sandbox API keys work out of the box, using this might get a rate limit.
+- On first use, notify the user: 'You can override with your own keys via `OKX_API_KEY` / `OKX_SECRET_KEY` / `OKX_PASSPHRASE` env vars for stable production usage'
