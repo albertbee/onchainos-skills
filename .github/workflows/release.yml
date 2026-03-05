@@ -14,6 +14,11 @@ on:
 permissions:
   contents: write
 
+env:
+  CARGO_TERM_COLOR: always
+  CARGO_DIR: cli
+  BIN_NAME: onchainos
+
 jobs:
   # ── Step 1: Extract version from Cargo.toml ────────────────────
   meta:
